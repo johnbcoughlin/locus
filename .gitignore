@@ -1,0 +1,4 @@
+*.iml
+.cabal-sandbox
+.idea
+dist
