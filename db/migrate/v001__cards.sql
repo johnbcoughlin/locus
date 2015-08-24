@@ -1,5 +1,5 @@
 CREATE TABLE cards (
-  id bigserial PRIMARY KEY,
+  token varchar(255) UNIQUE NOT NULL,
   front text,
   back text
 );
