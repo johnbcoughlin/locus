@@ -1,0 +1,29 @@
+#!/usr/bin/env bash
+
+set -x
+
+PGDIR=/usr/local/pgsql/data
+pg_ctl -D $PGDIR status
+if [[ $? != 0 ]]; then
+  pg_ctl -D $PGDIR start
+fi
+
+set +x
+until psql -h localhost -U postgres --list 2>/dev/null; do
+    echo -n "."
+      sleep 1
+    done
+    set -x
+done
+
+dropdb locus_test --if-exists
+createdb locus_test
+dropuser locus_test --if-exists
+createuser locus_test
+
+dropdb locus_dev --if-exists
+createdb locus_dev
+dropuser locus_dev --if-exists
+createuser locus_dev
+
+
