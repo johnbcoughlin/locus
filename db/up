@@ -9,12 +9,11 @@ if [[ $? != 0 ]]; then
 fi
 
 set +x
-until psql -h localhost -U postgres --list 2>/dev/null; do
-    echo -n "."
-      sleep 1
-    done
-    set -x
+until psql -h localhost --list 2>/dev/null; do
+  echo -n "."
+  sleep 1
 done
+set -x
 
 dropdb locus_test --if-exists
 createdb locus_test

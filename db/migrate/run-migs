@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+
+set -x
+
+PGURL="jdbc:postgresql://localhost:5432"
+LOCATIONS="filesystem:/Users/jack/src/locus/db/migrate"
+
+flyway migrate -url=$PGURL/locus_test -user=locus_test -locations=$LOCATIONS -sqlMigrationPrefix=v
+
+flyway migrate -url=$PGURL/locus_dev -user=locus_dev -locations=$LOCATIONS -sqlMigrationPrefix=v

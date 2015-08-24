@@ -17,6 +17,7 @@ executable locus
   -- other-modules:
   -- other-extensions:
   build-depends:       base,
+                       bytestring,
                        snap-core,
                        snap-server,
                        postgresql-simple
