@@ -8,13 +8,15 @@ import Snap.Core
 import Snap.Http.Server
 import Snap.Http.Server.Config
 import Database.PostgreSQL.Simple
+import Control.Applicative
+import Card
 
 main :: IO ()
 main = do conn <- testConnect
-          httpServe config app
+          httpServe config (app conn)
 
-app :: Snap ()
-app = putResponse ok
+app :: Connection -> Snap ()
+app conn = path "cards" (cardsResource conn)
 
 ok :: Response
 ok = setResponseCode 200 emptyResponse
@@ -27,5 +29,3 @@ testConnect = connectPostgreSQL "host=localhost port=5432 dbname=locus_test"
 
 devConnect :: IO Connection
 devConnect = connectPostgreSQL "host=localhost port=5432 dbname=locus_dev"
-
-
